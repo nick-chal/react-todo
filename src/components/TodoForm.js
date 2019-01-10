@@ -10,8 +10,9 @@ class TodoForm extends React.Component {
   }
 
   updateOnChange = e => {
+    const { value, name } = e.target;
     this.setState({
-      text: e.target.value
+      [name]: value
     });
   };
 
@@ -32,6 +33,8 @@ class TodoForm extends React.Component {
       <>
         <form onSubmit={this.submitTodo}>
           <input
+            className="todo-input"
+            name="text"
             onChange={this.updateOnChange}
             type="text"
             placeholder="Add Todo"

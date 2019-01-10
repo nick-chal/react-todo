@@ -7,13 +7,14 @@ class TodoList extends React.Component {
     super(props);
 
     this.state = {
-      todos: []
+      todos: [],
+      showState: 'all'
     };
   }
 
   updateTodoList = todo => {
-    this.setState(state => ({
-      todos: [todo, ...state.todos]
+    this.setState(prevState => ({
+      todos: [todo, ...prevState.todos]
     }));
   };
 
@@ -26,12 +27,45 @@ class TodoList extends React.Component {
     }));
   };
 
+  populateTodo = showState => {
+    if (showState === 'remaining')
+      return this.state.todos.filter(todo => !todo.completed);
+    else if (showState === 'completed')
+      return this.state.todos.filter(todo => todo.completed);
+    else return this.state.todos;
+  };
+
+  toggleShowState = showState => {
+    this.setState({ showState });
+  };
+
   render() {
+    const renderTodo = this.populateTodo(this.state.showState);
     return (
       <>
+        <div>
+          <button
+            className={this.state.showState === 'all' ? 'active' : null}
+            onClick={() => this.toggleShowState('all')}
+          >
+            Show All
+          </button>
+          <button
+            className={this.state.showState === 'remaining' ? 'active' : null}
+            onClick={() => this.toggleShowState('remaining')}
+          >
+            Remaining
+          </button>
+          <button
+            className={this.state.showState === 'completed' ? 'active' : null}
+            onClick={() => this.toggleShowState('completed')}
+          >
+            Completed
+          </button>
+        </div>
         <TodoForm updateTodo={this.updateTodoList} />
         <ul>
-          {this.state.todos.map(todo => (
+          {renderTodo.map(todo => (
             <Todo
               key={todo.id}
               todo={todo}
