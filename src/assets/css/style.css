@@ -1,0 +1,7 @@
+.completed-todo {
+  text-decoration: line-through;
+  background-color: darkgray;
+}
+ul {
+  list-style-type: none;
+}
