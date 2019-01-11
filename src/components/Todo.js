@@ -1,10 +1,17 @@
 import React from 'react';
 
-export default props => (
+const Todo = props => (
   <li
     onClick={() => props.toggleCompleted(props.todo.id)}
     className={props.todo.completed ? 'completed-todo' : null}
   >
-    {props.todo.text}
+    <span> {props.todo.text}</span>
+    <i
+      className="fa fa-trash delete"
+      onClick={() => props.deleteTodo(props.todo.id)}
+    />
+    <i className="fa fa-pencil" />
   </li>
 );
+
+export default Todo;

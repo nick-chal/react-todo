@@ -16,9 +16,11 @@ class TodoForm extends React.Component {
     });
   };
 
+  checkValidInput = string => [...string].some(el => el !== ' ');
+
   submitTodo = e => {
     e.preventDefault();
-    if (/\S/.test(this.state.text)) {
+    if (this.checkValidInput(this.state.text)) {
       this.props.updateTodo({
         id: Date.now().toString(),
         text: this.state.text,
