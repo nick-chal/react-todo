@@ -24,7 +24,8 @@ class TodoForm extends React.Component {
       this.props.updateTodo({
         id: Date.now().toString(),
         text: this.state.text,
-        completed: false
+        completed: false,
+        editing: false
       });
       this.setState({ text: '' });
     }
@@ -42,6 +43,7 @@ class TodoForm extends React.Component {
             placeholder="Add Todo"
             value={this.state.text}
           />
+          <i className="fa fa-plus add-todo" onClick={this.submitTodo} />
         </form>
       </>
     );

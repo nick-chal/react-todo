@@ -22,6 +22,16 @@ class App extends Component {
     }));
   };
 
+  toggleEditOption = id => {
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo =>
+        todo.id === id
+          ? { ...todo, editing: !todo.editing }
+          : { ...todo, editing: false }
+      )
+    }));
+  };
+
   toggleCompleted = id => {
     this.setState(state => ({
       todos: state.todos.map(todo => {
@@ -41,7 +51,7 @@ class App extends Component {
     return this.state.todos;
   };
 
-  toggleShowState = showState => {
+  setShowState = showState => {
     this.setState({ showState });
   };
 
@@ -51,19 +61,29 @@ class App extends Component {
     }));
   };
 
+  editTodo = editedTodo => {
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo =>
+        todo.id === editedTodo.id ? editedTodo : todo
+      )
+    }));
+  };
+
   render() {
     return (
       <div className="App">
         <h1>TODO List</h1>
         <Menu
           viewType={this.state.showState}
-          toggleShowState={this.toggleShowState}
+          setShowState={this.setShowState}
         />
         <TodoForm updateTodo={this.updateTodoList} />
         <TodoList
-          generateTodoItems={this.generateTodoItems}
+          editTodo={this.editTodo}
+          toggleEditOption={this.toggleEditOption}
           deleteTodo={this.deleteTodo}
           toggleCompleted={this.toggleCompleted}
+          generateTodoItems={this.generateTodoItems}
         />
       </div>
     );

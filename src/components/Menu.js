@@ -1,24 +1,23 @@
 import React from 'react';
 
 const Menu = props => {
-  console.log(props);
   return (
-    <div>
+    <div className="nav-button">
       <button
         className={props.viewType === 'all' ? 'active' : null}
-        onClick={() => props.toggleShowState('all')}
+        onClick={() => props.setShowState('all')}
       >
         Show All
       </button>
       <button
         className={props.viewType === 'remaining' ? 'active' : null}
-        onClick={() => props.toggleShowState('remaining')}
+        onClick={() => props.setShowState('remaining')}
       >
         Remaining
       </button>
       <button
         className={props.viewType === 'completed' ? 'active' : null}
-        onClick={() => props.toggleShowState('completed')}
+        onClick={() => props.setShowState('completed')}
       >
         Completed
       </button>
