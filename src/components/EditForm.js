@@ -1,45 +1,50 @@
 import React from 'react';
 
+import { purifyText } from '../utils/utils';
+import { checkValidInput } from '../utils/utils';
+
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
-    const todo = this.props.prevTodo;
+    const todo = props.prevTodo;
 
     this.state = {
       text: todo.text
     };
   }
 
-  updateOnChange = e => {
+  handleChange = e => {
     const { value, name } = e.target;
     this.setState({
       [name]: value
     });
   };
 
-  // checkValidInput = string => [...string].some(el => el !== ' ');
-
-  editTodo = e => {
+  onEditTodo = e => {
     e.preventDefault();
     e.stopPropagation();
-    this.props.editTodo({
-      id: this.props.prevTodo.id,
-      text: this.state.text ? this.state.text : this.props.prevTodo.text,
-      completed: this.props.prevTodo.completed,
-      editing: false
-    });
+    if (checkValidInput(this.state.text))
+      this.props.onEditTodo({
+        id: this.props.prevTodo.id,
+        text: purifyText(this.state.text)
+          ? this.state.text
+          : this.props.prevTodo.text,
+        completed: this.props.prevTodo.completed,
+        editing: false
+      });
   };
 
   render() {
     return (
-      <form onSubmit={this.editTodo}>
+      <form onSubmit={this.onEditTodo}>
         <input
           className="todo-edit"
           name="text"
-          onChange={this.updateOnChange}
+          onChange={this.handleChange}
           type="text"
           placeholder="Edit Todo"
           value={this.state.text}
+          autoComplete="off"
         />
       </form>
     );

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
+import Menu from './Menu';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
-import Menu from './Menu';
+import SearchForm from './SearchForm';
+import { purifyText } from '../utils/utils';
+import { TODO_STATUS } from '../constants/common';
 
 import '../assets/css/styles';
 
@@ -12,7 +15,8 @@ class App extends Component {
 
     this.state = {
       todos: [],
-      showState: 'all'
+      searchQuery: '',
+      showState: TODO_STATUS.ALL
     };
   }
 
@@ -36,19 +40,26 @@ class App extends Component {
     this.setState(state => ({
       todos: state.todos.map(todo => {
         if (todo.id === id) return { ...todo, completed: !todo.completed };
-        return { ...todo };
+        return todo;
       })
     }));
   };
 
   generateTodoItems = () => {
-    if (this.state.showState === 'remaining')
-      return this.state.todos.filter(todo => !todo.completed);
+    if (this.state.showState === TODO_STATUS.REMAINING)
+      return this.state.todos.filter(
+        todo => !todo.completed && todo.text.includes(this.state.searchQuery)
+      );
 
-    if (this.state.showState === 'completed')
-      return this.state.todos.filter(todo => todo.completed);
+    if (this.state.showState === TODO_STATUS.COMPLETED)
+      return this.state.todos.filter(
+        todo => todo.completed && todo.text.includes(this.state.searchQuery)
+      );
 
-    return this.state.todos;
+    if (this.state.showState === TODO_STATUS.ALL)
+      return this.state.todos.filter(todo =>
+        todo.text.includes(this.state.searchQuery)
+      );
   };
 
   setShowState = showState => {
@@ -61,7 +72,7 @@ class App extends Component {
     }));
   };
 
-  editTodo = editedTodo => {
+  onEditTodo = editedTodo => {
     this.setState(prevState => ({
       todos: prevState.todos.map(todo =>
         todo.id === editedTodo.id ? editedTodo : todo
@@ -69,21 +80,33 @@ class App extends Component {
     }));
   };
 
+  updateSearchQuery = string => {
+    this.setState(prevState => ({
+      searchQuery: purifyText(string)
+    }));
+  };
+
   render() {
+    const todoList = this.generateTodoItems();
+    console.log(this.state.searchQuery);
     return (
       <div className="App">
         <h1>TODO List</h1>
         <Menu
-          viewType={this.state.showState}
+          viewState={this.state.showState}
           setShowState={this.setShowState}
+        />
+        <SearchForm
+          searchValue={this.state.searchQuery}
+          updateSearchQuery={this.updateSearchQuery}
         />
         <TodoForm updateTodo={this.updateTodoList} />
         <TodoList
-          editTodo={this.editTodo}
-          toggleEditOption={this.toggleEditOption}
+          itemsToShow={todoList}
+          onEditTodo={this.onEditTodo}
           deleteTodo={this.deleteTodo}
           toggleCompleted={this.toggleCompleted}
-          generateTodoItems={this.generateTodoItems}
+          toggleEditOption={this.toggleEditOption}
         />
       </div>
     );

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { purifyText } from '../utils/utils';
+import { checkValidInput } from '../utils/utils';
+
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
@@ -16,16 +19,14 @@ class TodoForm extends React.Component {
     });
   };
 
-  checkValidInput = string => [...string].some(el => el !== ' ');
-
   submitTodo = e => {
     e.preventDefault();
-    if (this.checkValidInput(this.state.text)) {
+    if (checkValidInput(this.state.text)) {
       this.props.updateTodo({
         id: Date.now().toString(),
-        text: this.state.text,
+        editing: false,
         completed: false,
-        editing: false
+        text: purifyText(this.state.text)
       });
       this.setState({ text: '' });
     }
@@ -36,12 +37,13 @@ class TodoForm extends React.Component {
       <>
         <form onSubmit={this.submitTodo}>
           <input
-            className="todo-input"
             name="text"
-            onChange={this.updateOnChange}
             type="text"
+            autoComplete="off"
+            className="todo-input"
             placeholder="Add Todo"
             value={this.state.text}
+            onChange={this.updateOnChange}
           />
           <i className="fa fa-plus add-todo" onClick={this.submitTodo} />
         </form>

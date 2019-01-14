@@ -8,10 +8,7 @@ const Todo = props => (
     className={props.todo.completed ? 'completed-todo' : null}
   >
     {props.todo.editing ? (
-      <EditForm
-        prevTodo={props.todo}
-        editTodo={props.editTodo || console.log(props.editTodo)}
-      />
+      <EditForm prevTodo={props.todo} onEditTodo={props.onEditTodo} />
     ) : (
       <span>{props.todo.text}</span>
     )}
