@@ -1,9 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { purifyText } from '../utils/utils';
-import { checkValidInput } from '../utils/utils';
+import { purifyText, checkValidInput } from '../utils/Strings';
 
+/**
+ * Form to add new todo.
+ *
+ * @class TodoForm
+ * @extends {React.Component}
+ */
 class TodoForm extends React.Component {
+  /**
+   * Creates an instance of TodoForm.
+   *
+   * @param {*} props
+   * @memberof TodoForm
+   */
   constructor(props) {
     super(props);
 
@@ -12,13 +24,24 @@ class TodoForm extends React.Component {
     };
   }
 
-  updateOnChange = e => {
+  /**
+   * Handle the change on input field.
+   *
+   * @param {*} e
+   */
+  handleChange = e => {
     const { value, name } = e.target;
+
     this.setState({
       [name]: value
     });
   };
 
+  /**
+   * Submit the new todo along with its properties.
+   *
+   * @param {*} e
+   */
   submitTodo = e => {
     e.preventDefault();
     if (checkValidInput(this.state.text)) {
@@ -32,6 +55,12 @@ class TodoForm extends React.Component {
     }
   };
 
+  /**
+   *
+   *
+   * @returns
+   * @memberof TodoForm
+   */
   render() {
     return (
       <>
@@ -43,7 +72,7 @@ class TodoForm extends React.Component {
             className="todo-input"
             placeholder="Add Todo"
             value={this.state.text}
-            onChange={this.updateOnChange}
+            onChange={this.handleChange}
           />
           <i className="fa fa-plus add-todo" onClick={this.submitTodo} />
         </form>
@@ -51,5 +80,9 @@ class TodoForm extends React.Component {
     );
   }
 }
+
+TodoForm.propTypes = {
+  updateTodo: PropTypes.func
+};
 
 export default TodoForm;

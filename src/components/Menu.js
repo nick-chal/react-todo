@@ -1,7 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { TODO_STATUS } from '../constants/common';
 
+/**
+ *
+ *
+ * @param {object} props
+ * @returns  {React.Component}
+ */
 const Menu = props => {
   return (
     <div className="nav-button">
@@ -25,6 +32,11 @@ const Menu = props => {
       </button>
     </div>
   );
+};
+
+Menu.propTypes = {
+  viewState: PropTypes.string,
+  setShowState: PropTypes.func
 };
 
 export default Menu;
