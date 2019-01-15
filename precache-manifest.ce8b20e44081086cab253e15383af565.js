@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/react-todo/static/media/fontawesome-webfont.af7ae505.woff2"
   },
   {
-    "revision": "fa32589d49572ee50054",
+    "revision": "de4b35d7306fc42cb5bd",
     "url": "/react-todo/static/css/main.f9fe9fce.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = [
     "url": "/react-todo/static/js/runtime~main.5bee33ad.js"
   },
   {
-    "revision": "fa32589d49572ee50054",
-    "url": "/react-todo/static/js/main.fa32589d.chunk.js"
+    "revision": "de4b35d7306fc42cb5bd",
+    "url": "/react-todo/static/js/main.de4b35d7.chunk.js"
   },
   {
     "revision": "fee66e712a8a08eef5805a46892932ad",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/react-todo/static/css/1.b761654f.chunk.css"
   },
   {
-    "revision": "7620bea78483d03b5400cfc288b02c4d",
+    "revision": "8a7f718e58b43356ca1944c4a22a275e",
     "url": "/react-todo/index.html"
   }
 ];
