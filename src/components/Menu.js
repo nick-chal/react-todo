@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import { TODO_STATUS } from '../constants/common';
 
 /**
- *
- *
  * @param {object} props
- * @returns  {React.Component}
  */
 const Menu = props => {
   return (

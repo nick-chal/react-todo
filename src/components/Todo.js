@@ -6,7 +6,7 @@ import EditForm from './EditForm';
 /**
  * Show individual todo along with the icons.
  *
- * @param {*} props
+ * @param {object} props
  */
 const Todo = props => (
   <li

@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { purifyText } from '../utils/Strings';
+import { purifyText } from '../utils/strings';
 
 /**
- *
- *
- * @class SearchForm
- * @extends {React.Component}
+ * Search component shows search field and handles query.
  */
 class SearchForm extends React.Component {
   /**
-   * Creates an instance of SearchForm.
-   *
    * @param {object} props
-   * @memberof SearchForm
    */
   constructor(props) {
     super(props);
@@ -27,7 +21,7 @@ class SearchForm extends React.Component {
   /**
    * Handle the change of the input field.
    *
-   * @param {*} e
+   * @param {object} e
    */
   handleChange = e => {
     const { value, name } = e.target;
@@ -42,7 +36,6 @@ class SearchForm extends React.Component {
 
   /**
    * Clear the input field value.
-   *
    */
   clearSearch = () => {
     this.setState({ text: '' });
@@ -52,17 +45,14 @@ class SearchForm extends React.Component {
   /**
    * Prevents the refresh of the page on pressing enter.
    *
-   * @param {*} e
+   * @param {object} e
    */
   submitTodo = e => {
     e.preventDefault();
   };
 
   /**
-   *
-   *
-   * @returns {React.Component}
-   * @memberof SearchForm
+   * Renders the search form to input search query.
    */
   render() {
     return (

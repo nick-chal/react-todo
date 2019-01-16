@@ -4,7 +4,7 @@ import Menu from './Menu';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
 import SearchForm from './SearchForm';
-import { purifyText } from '../utils/Strings';
+import { purifyText } from '../utils/strings';
 import { TODO_STATUS } from '../constants/common';
 
 import '../assets/css/styles';
@@ -14,7 +14,6 @@ import '../assets/css/styles';
  */
 class App extends Component {
   /**
-   *
    * @param {object} props Props from the parent.
    */
   constructor(props) {
@@ -89,7 +88,7 @@ class App extends Component {
   /**
    * Generate the todo list from main list based on the showState menu and search query.
    *
-   * @returns  {Array}  Returns the filtered array of todos.
+   * @returns {Array} Returns the filtered array of todos.
    */
   generateTodoItems = () => {
     if (this.state.showState === TODO_STATUS.REMAINING) {
@@ -114,7 +113,7 @@ class App extends Component {
   /**
    * Set the show state ie show all || remaining || compeleted.
    *
-   * @param  {String} showState The state selected in the menu component.
+   * @param {String} showState The state selected in the menu component.
    */
   setShowState = showState => {
     this.setState({ showState });
@@ -123,7 +122,7 @@ class App extends Component {
   /**
    * Deletes the todo based on the id.
    *
-   * @param  {int} id The id of the todo.
+   * @param {int} id The id of the todo.
    */
   deleteTodo = id => {
     this.setState(prevState => ({
@@ -134,7 +133,7 @@ class App extends Component {
   /**
    * Edit the text of the todo.
    *
-   * @param  {object}  editedTodo The edited todo from the EditForm.
+   * @param {object} editedTodo The edited todo from the EditForm.
    */
   onEditTodo = editedTodo => {
     this.setState(prevState => ({
@@ -147,7 +146,7 @@ class App extends Component {
   /**
    * Update the search query in the search form.
    *
-   * @param  {String}  string The search text from the search form.
+   * @param {String} string The search text from the search form.
    */
   updateSearchQuery = string => {
     this.setState({
@@ -156,6 +155,7 @@ class App extends Component {
   };
 
   /**
+   * Render the overall app.
    */
   render() {
     const todoList = this.generateTodoItems();

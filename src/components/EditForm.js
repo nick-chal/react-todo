@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { checkValidInput } from '../utils/Strings';
+import { checkValidInput } from '../utils/strings';
 
 /**
  * Handle the edit of the todo.
- *
- * @class EditForm
- * @extends {React.Component}
  */
 class EditForm extends React.Component {
   /**
-   * @param  {props} props
+   * @param {props} props
    */
   constructor(props) {
     super(props);
@@ -61,9 +58,7 @@ class EditForm extends React.Component {
   };
 
   /**
-   *
-   * @returns {React.Component}
-   *
+   * Render the Editform for each todo.
    */
   render() {
     return (

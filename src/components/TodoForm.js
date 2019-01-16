@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { purifyText, checkValidInput } from '../utils/Strings';
+import { purifyText, checkValidInput } from '../utils/strings';
 
 /**
  * Form to add new todo.
- *
- * @class TodoForm
- * @extends {React.Component}
  */
 class TodoForm extends React.Component {
   /**
-   * Creates an instance of TodoForm.
-   *
-   * @param {*} props
-   * @memberof TodoForm
+   * @param {object} props
    */
   constructor(props) {
     super(props);
@@ -27,7 +21,7 @@ class TodoForm extends React.Component {
   /**
    * Handle the change on input field.
    *
-   * @param {*} e
+   * @param {object} e
    */
   handleChange = e => {
     const { value, name } = e.target;
@@ -40,7 +34,7 @@ class TodoForm extends React.Component {
   /**
    * Submit the new todo along with its properties.
    *
-   * @param {*} e
+   * @param {object} e
    */
   submitTodo = e => {
     e.preventDefault();
@@ -56,10 +50,7 @@ class TodoForm extends React.Component {
   };
 
   /**
-   *
-   *
-   * @returns
-   * @memberof TodoForm
+   * Renders the form to add new todo.
    */
   render() {
     return (

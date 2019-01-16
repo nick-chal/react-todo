@@ -5,8 +5,7 @@ import Todo from './Todo';
 /**
  * Show the list of the todos.
  *
- * @param {*} props
- * @returns
+ * @param {object} props
  */
 const TodoList = props => {
   const todoList = props.todoList;

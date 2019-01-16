@@ -4,6 +4,15 @@
   background-color: rgb(236, 236, 236);
 }
 
+.App {
+  margin: 10px auto;
+  width: 70%;
+}
+
+.App h1 {
+  text-align: center;
+}
+
 .App div {
   text-align: center;
 }
@@ -124,4 +133,12 @@ li input {
 
 .cancel-edit:hover {
   color: red;
+}
+
+/* Media Queries*/
+
+@media screen and (max-width: 768px) {
+  .App {
+    width: 95%;
+  }
 }
