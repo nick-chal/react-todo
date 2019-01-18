@@ -4,8 +4,21 @@
   background-color: rgb(236, 236, 236);
 }
 
+.App {
+  margin: 10px auto;
+  width: 70%;
+}
+
+.App h1 {
+  text-align: center;
+}
+
 .App div {
   text-align: center;
+}
+
+i {
+  padding: 0 5px;
 }
 
 .App div button {
@@ -23,8 +36,8 @@
 }
 
 .App div button.active {
-  background-color: rgb(94, 94, 94);
   color: rgb(224, 224, 224);
+  background-color: rgb(94, 94, 94);
 }
 
 ul {
@@ -37,18 +50,24 @@ li {
   width: 100%;
   display: table;
   cursor: pointer;
-  padding: 0px 20px;
+  padding: 0 0 0 20px;
   line-height: 60px;
   box-sizing: border-box;
   border-bottom: 1px solid #ccc;
 }
 
+li span {
+  width: 85%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 li i {
   float: right;
-  vertical-align: middle;
   margin: 20px 0;
+  margin-right: 10px;
   display: table-cell;
-  margin-left: 10px;
+  vertical-align: middle;
   color: rgb(94, 94, 94);
   font-size: 20px !important;
 }
@@ -58,10 +77,11 @@ li i.delete:hover {
 }
 
 li i.edit:hover {
-  color: #2a6ea0;
+  color: blue;
 }
 
 form {
+  margin: 5px 0;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
@@ -72,25 +92,25 @@ li form {
 }
 
 input {
-  width: 90%;
+  width: 89%;
+  border: none;
+  outline: none;
+  margin: 0 0 0 2px;
   padding: 12px 20px;
   display: inline-block;
   box-sizing: border-box;
-  border: none;
-  outline: none;
 }
 
 .add-todo {
   width: 10%;
-  text-align: right;
   cursor: pointer;
-  padding: 0 10px;
+  text-align: right;
   box-sizing: border-box;
   font-size: 20px !important;
 }
 
 li input {
-  width: 80%;
+  max-width: 75%;
   margin: 0;
   padding: 5px 20px;
   border-radius: 4px;
@@ -105,4 +125,20 @@ li input {
   margin: auto;
   padding-top: 25px;
   color: rgb(200, 200, 200);
+}
+
+.accept-edit:hover {
+  color: blue;
+}
+
+.cancel-edit:hover {
+  color: red;
+}
+
+/* Media Queries*/
+
+@media screen and (max-width: 768px) {
+  .App {
+    width: 95%;
+  }
 }

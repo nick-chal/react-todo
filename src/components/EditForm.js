@@ -1,49 +1,87 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-class TodoForm extends React.Component {
+import { checkValidInput } from '../utils/strings';
+
+/**
+ * Handle the edit of the todo.
+ */
+class EditForm extends React.Component {
+  /**
+   * @param {props} props
+   */
   constructor(props) {
     super(props);
-    const todo = this.props.prevTodo;
+    const todo = props.prevTodo;
 
     this.state = {
       text: todo.text
     };
   }
 
-  updateOnChange = e => {
+  /**
+   * Handle the change of the input field.
+   *
+   * @param {object} e The event object of the form.
+   */
+  handleChange = e => {
     const { value, name } = e.target;
+
     this.setState({
       [name]: value
     });
   };
 
-  // checkValidInput = string => [...string].some(el => el !== ' ');
-
-  editTodo = e => {
+  /**
+   * Submit the edited todo.
+   *
+   * @param {object} e The event object of the form.
+   */
+  submitEditTodo = e => {
     e.preventDefault();
     e.stopPropagation();
-    this.props.editTodo({
-      id: this.props.prevTodo.id,
-      text: this.state.text ? this.state.text : this.props.prevTodo.text,
-      completed: this.props.prevTodo.completed,
-      editing: false
-    });
+    if (checkValidInput(this.state.text)) {
+      this.props.onEditTodo({
+        id: this.props.prevTodo.id,
+        text: this.state.text,
+        completed: this.props.prevTodo.completed,
+        editing: false
+      });
+    }
   };
 
+  /**
+   * Cancel the edit of todo and send original value.
+   */
+  cancelEdit = () => {
+    this.props.onEditTodo({ ...this.props.prevTodo, editing: false });
+  };
+
+  /**
+   * Render the Editform for each todo.
+   */
   render() {
     return (
-      <form onSubmit={this.editTodo}>
+      <form onSubmit={this.submitEditTodo}>
         <input
-          className="todo-edit"
           name="text"
-          onChange={this.updateOnChange}
           type="text"
+          autoComplete="off"
+          className="todo-edit"
           placeholder="Edit Todo"
           value={this.state.text}
+          onChange={this.handleChange}
         />
+        <i className="fa fa-times cancel-edit" onClick={this.cancelEdit} />
+        <i className="fa fa-check accept-edit" onClick={this.submitEditTodo} />
       </form>
     );
   }
 }
 
-export default TodoForm;
+EditForm.propTypes = {
+  prevTodo: PropTypes.object,
+  onEditTodo: PropTypes.func
+};
+
+export default EditForm;
