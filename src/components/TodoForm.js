@@ -10,18 +10,22 @@ class TodoForm extends React.Component {
   }
 
   updateOnChange = e => {
+    const { value, name } = e.target;
     this.setState({
-      text: e.target.value
+      [name]: value
     });
   };
 
+  checkValidInput = string => [...string].some(el => el !== ' ');
+
   submitTodo = e => {
     e.preventDefault();
-    if (/\S/.test(this.state.text)) {
+    if (this.checkValidInput(this.state.text)) {
       this.props.updateTodo({
         id: Date.now().toString(),
         text: this.state.text,
-        completed: false
+        completed: false,
+        editing: false
       });
       this.setState({ text: '' });
     }
@@ -32,11 +36,14 @@ class TodoForm extends React.Component {
       <>
         <form onSubmit={this.submitTodo}>
           <input
+            className="todo-input"
+            name="text"
             onChange={this.updateOnChange}
             type="text"
             placeholder="Add Todo"
             value={this.state.text}
           />
+          <i className="fa fa-plus add-todo" onClick={this.submitTodo} />
         </form>
       </>
     );

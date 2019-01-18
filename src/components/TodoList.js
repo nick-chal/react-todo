@@ -1,45 +1,27 @@
 import React from 'react';
 import Todo from './Todo';
-import TodoForm from './TodoForm';
 
 class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      todos: []
-    };
-  }
-
-  updateTodoList = todo => {
-    this.setState(state => ({
-      todos: [todo, ...state.todos]
-    }));
-  };
-
-  toggleCompleted = id => {
-    this.setState(state => ({
-      todos: state.todos.map(todo => {
-        if (todo.id === id) return { ...todo, completed: !todo.completed };
-        return { ...todo };
-      })
-    }));
-  };
-
   render() {
+    const renderTodo = this.props.generateTodoItems();
+
     return (
-      <>
-        <TodoForm updateTodo={this.updateTodoList} />
-        <ul>
-          {this.state.todos.map(todo => (
+      <ul className={!renderTodo.length ? 'empty' : ''}>
+        {renderTodo.length ? (
+          renderTodo.map(todo => (
             <Todo
-              key={todo.id}
               todo={todo}
-              toggleCompleted={this.toggleCompleted}
+              key={todo.id}
+              toggleEditOption={this.props.toggleEditOption}
+              editTodo={this.props.editTodo}
+              deleteTodo={this.props.deleteTodo}
+              toggleCompleted={this.props.toggleCompleted}
             />
-          ))}
-        </ul>
-      </>
+          ))
+        ) : (
+          <div className="no-items">'No Items Found'</div>
+        )}
+      </ul>
     );
   }
 }
